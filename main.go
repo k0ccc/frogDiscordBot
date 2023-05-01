@@ -25,7 +25,6 @@ type redditPost []struct {
 type redditData struct {
 	Children redditPost `json:"children"`
 }
-
 type reddit struct {
 	Data redditData `json:"data"`
 }
