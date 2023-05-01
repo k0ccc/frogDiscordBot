@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
+	"flag"
 	"io"
 	"math/rand"
 	"net/http"
@@ -25,15 +25,27 @@ type redditPost []struct {
 type redditData struct {
 	Children redditPost `json:"children"`
 }
+
 type reddit struct {
 	Data redditData `json:"data"`
 }
 
 var command string = "!wednsday"
+// Variables used for command line parameters
+var (
+	Token string
+)
+
+func init() {
+
+	flag.StringVar(&Token, "t", "", "Bot Token")
+	flag.Parse()
+}
 
 func main() {
-	dg, err := discordgo.New("Bot " + "")
 
+	// Create a new Discord session using the provided bot token.
+	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
